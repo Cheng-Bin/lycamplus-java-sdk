@@ -2,14 +2,13 @@ package tv.lycam.oauth;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import org.junit.*;
-import tv.lycam.config.Constant;
 import tv.lycam.model.OAuthModel;
 import tv.lycam.oauth2.LycamPlusOAuth2;
 
 import java.io.IOException;
 
 /**
- * Created by lycamandroid on 17/1/18.
+ * Created by chapin on 17/1/18.
  */
 public class OAuth2Test {
 

@@ -11,7 +11,7 @@ public class LycamPlus {
     public LycamPlus(String appKey, String appSecret, String masterSecret) {
 
         OAuthModel oAuthModel = new OAuthModel(appKey, appSecret, masterSecret);
-        HttpClient httpClient = new HttpClient(oAuthModel);
+
 
         // User
 
