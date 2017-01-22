@@ -22,7 +22,7 @@ public class StreamAPI {
      *
      * @param oAuthModel
      */
-    public Stream(OAuthModel oAuthModel) {
+    public StreamAPI(OAuthModel oAuthModel) {
         httpClient = new HttpClient(oAuthModel);
         gson = new Gson();
     }

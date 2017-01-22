@@ -2,6 +2,8 @@ package tv.lycam;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+import tv.lycam.api.StreamAPI;
+import tv.lycam.api.UserAPI;
 import tv.lycam.model.OAuthModel;
 import tv.lycam.oauth2.LycamPlusOAuth2;
 
@@ -10,10 +12,11 @@ import tv.lycam.oauth2.LycamPlusOAuth2;
  */
 public class LycamPlusTest {
 
-    private static String appKey;
-    private static String appSecret;
-    private static  String masterSercet;
-    protected static OAuthModel oAuthModel;
+    protected static String appKey;
+    protected static String appSecret;
+    protected static  String masterSercet;
+    protected static UserAPI userInstance;
+    protected static StreamAPI streamInstance;
 
 
     @BeforeClass
@@ -21,7 +24,11 @@ public class LycamPlusTest {
         appKey = "488ITUGN1G";
         appSecret = "z1oyx55jNQEXeRUu1iltfINZegWuGx";
         masterSercet = "9O1MZJ5UJwnuZky3tUBiZFPAlDJNs2";
-        oAuthModel = new OAuthModel(appKey, appSecret, masterSercet);
+
+        LycamPlus lycamPlus = new LycamPlus(appKey, appSecret, masterSercet);
+        userInstance = lycamPlus.getUserInstance();
+        streamInstance = lycamPlus.getStreamInstance();
+
     }
 
     @AfterClass
@@ -29,7 +36,7 @@ public class LycamPlusTest {
         appKey = null;
         appSecret = null;
         masterSercet = null;
-        oAuthModel = null;
+        userInstance = null;
     }
 
 }

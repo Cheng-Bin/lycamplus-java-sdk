@@ -6,8 +6,12 @@ import tv.lycam.exception.LycamPlusException;
 import tv.lycam.model.OAuthModel;
 import tv.lycam.oauth2.LycamPlusOAuth2;
 import com.github.scribejava.core.model.OAuth2AccessToken;
+import tv.lycam.utils.TimeUtil;
 
 import java.io.IOException;
+import java.sql.Time;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Created by chapin on 17/1/18.
@@ -18,6 +22,8 @@ public class HttpClient {
 
     private OkHttpClient client;
     private LycamPlusOAuth2 lycamPlusOAuth2;
+    private static OAuth2AccessToken appToken = null;
+    private static Calendar oldDate;
 
 
     public HttpClient(OAuthModel oAuthModel) {
@@ -128,19 +134,25 @@ public class HttpClient {
         @Override
         public Response intercept(Chain chain) throws IOException {
 
+            Request request = chain.request();
 
-            Request origin = chain.request();
-            OAuth2AccessToken tokenObject = lycamPlusOAuth2.getToken();
-            String token = tokenObject.getAccessToken();
 
-            Request.Builder requestBuilder = origin.newBuilder()
+            if (appToken == null || TimeUtil.isExpires(oldDate.getTime())) {
+                appToken = lycamPlusOAuth2.getToken();
+                oldDate = TimeUtil.getCurrentTime();
+                oldDate.add(Calendar.SECOND, appToken.getExpiresIn());
+            }
+
+            String token = appToken.getAccessToken();
+            Request.Builder requestBuilder = request.newBuilder()
                     .header(Constant.HEADER_AUTHORIZATION, Constant.HEADER_BEARER + token);
-            Request request = requestBuilder.build();
-
+            request = requestBuilder.build();
 
             return chain.proceed(request);
         }
     };
+
+
 
 
 }

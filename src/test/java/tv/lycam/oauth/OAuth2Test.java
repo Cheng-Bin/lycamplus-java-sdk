@@ -3,6 +3,7 @@ package tv.lycam.oauth;
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import org.junit.*;
 import tv.lycam.LycamPlusTest;
+import tv.lycam.model.OAuthModel;
 import tv.lycam.oauth2.LycamPlusOAuth2;
 
 import java.io.IOException;
@@ -16,6 +17,7 @@ public class OAuth2Test extends LycamPlusTest {
 
     @BeforeClass
     public static void before() {
+        OAuthModel oAuthModel = new OAuthModel(appKey, appSecret, masterSercet);
         lycamPlusOAuth2 = new LycamPlusOAuth2(oAuthModel);
     }
 

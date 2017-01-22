@@ -14,22 +14,11 @@ import tv.lycam.model.UserResponseModel;
 
 public class UserTest extends LycamPlusTest {
 
-    private static User userInstance;
-
-    @BeforeClass
-    public static void before() {
-        userInstance = new User(oAuthModel);
-    }
-
-    @AfterClass
-    public static void after() {
-        userInstance = null;
-    }
 
     @Test
     public void create() {
         UserRequestModel userRequestModel = new UserRequestModel();
-        userRequestModel.setUsername("lycam-test2");
+        userRequestModel.setUsername("lycam-test4");
         UserResponseModel responseModel = userInstance.create(userRequestModel);
         System.out.print(responseModel);
     }

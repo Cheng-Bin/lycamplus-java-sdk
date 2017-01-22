@@ -3,6 +3,7 @@ package tv.lycam.oauth2;
 import com.github.scribejava.core.builder.ServiceBuilder;
 import com.github.scribejava.core.builder.api.DefaultApi20;
 import com.github.scribejava.core.model.OAuth2AccessToken;
+import com.github.scribejava.core.model.OAuth2Authorization;
 import com.github.scribejava.core.oauth.OAuth20Service;
 import tv.lycam.config.Constant;
 import tv.lycam.model.OAuthModel;
@@ -39,8 +40,10 @@ public class LycamPlusOAuth2 {
      * @throws IOException
      */
     public OAuth2AccessToken getToken() throws IOException {
-        return oAuth20Service.getAccessTokenPasswordGrant(oAuthModel.getUserName(),
+        OAuth2AccessToken oAuth2AccessToken = oAuth20Service.getAccessTokenPasswordGrant(oAuthModel.getUserName(),
                 oAuthModel.getMasterToken());
+
+        return oAuth2AccessToken;
     }
 
 

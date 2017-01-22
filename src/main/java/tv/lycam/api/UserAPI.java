@@ -23,7 +23,7 @@ public class UserAPI {
      *
      * @param oAuthModel
      */
-    public User(OAuthModel oAuthModel) {
+    public UserAPI(OAuthModel oAuthModel) {
         httpClient = new HttpClient(oAuthModel);
         gson = new Gson();
     }

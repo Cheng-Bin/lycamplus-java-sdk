@@ -15,18 +15,6 @@ import java.sql.Timestamp;
  */
 public class StreamTest extends LycamPlusTest {
 
-    private static Stream streamInstance;
-
-    @BeforeClass
-    public static void before() {
-        streamInstance = new Stream(oAuthModel);
-    }
-
-    @AfterClass
-    public static void after() {
-        streamInstance = null;
-    }
-
 
     @Test
     public void create() {
