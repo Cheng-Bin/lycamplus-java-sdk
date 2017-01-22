@@ -5,19 +5,8 @@ package tv.lycam.exception;
  */
 public class LycamPlusException extends Exception {
 
-    public LycamPlusException() {}
-
-
-    public LycamPlusException(Exception e) {
-        super(e);
-    }
-
-    public LycamPlusException(String message) {
-        super(message);
-    }
-
-    public LycamPlusException(String message, Throwable cause) {
-        super(message, cause);
+    public LycamPlusException(int code, String message) {
+        super("LycamPlus Exception: code=" + code + ", msg:" + message);
     }
 
 }

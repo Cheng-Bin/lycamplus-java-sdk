@@ -23,7 +23,7 @@ public class HttpClient {
     public HttpClient(OAuthModel oAuthModel) {
         lycamPlusOAuth2 = new LycamPlusOAuth2(oAuthModel);
         client = new OkHttpClient.Builder()
-                .addInterceptor(headerInterceptor)
+                .addInterceptor(httpInterceptor)
                 .build();
     }
 
@@ -34,7 +34,7 @@ public class HttpClient {
      * @param url
      * @return
      */
-    public String Get(String url) throws IOException{
+    public String Get(String url) throws Exception{
         Response response = null;
         Request request = new Request.Builder().url(url).build();
 
@@ -42,10 +42,10 @@ public class HttpClient {
 
 
         if (response.isSuccessful()) {
-            return response.body().toString();
+            return response.body().string();
+        } else {
+            throw new LycamPlusException(response.code(), response.message());
         }
-
-        return null;
     }
 
     /**
@@ -56,7 +56,7 @@ public class HttpClient {
      * @return
      * @throws IOException
      */
-    public String Post(String url, String jsonStr) throws IOException {
+    public String Post(String url, String jsonStr) throws Exception {
 
 
         Request request = new Request.Builder()
@@ -66,12 +66,11 @@ public class HttpClient {
 
         Response response = client.newCall(request).execute();
 
-
         if (response.isSuccessful()) {
-           response.body().toString();
+            return response.body().string();
+        } else {
+            throw new LycamPlusException(response.code(), response.message());
         }
-
-        return null;
     }
 
     /**
@@ -81,7 +80,7 @@ public class HttpClient {
      * @param jsonStr
      * @return
      */
-    public String Put(String url, String jsonStr) throws IOException{
+    public String Put(String url, String jsonStr) throws Exception{
 
 
         Request request = new Request.Builder()
@@ -93,10 +92,11 @@ public class HttpClient {
 
 
         if (response.isSuccessful()) {
-            return response.body().toString();
+            return response.body().string();
+        } else {
+            throw new LycamPlusException(response.code(), response.message());
         }
 
-        return null;
     }
 
     /**
@@ -104,7 +104,7 @@ public class HttpClient {
      * @param url
      * @return
      */
-    public String Delete(String url) throws IOException {
+    public String Delete(String url) throws Exception {
         Request request = new Request.Builder()
                         .url(url)
                         .delete()
@@ -113,25 +113,31 @@ public class HttpClient {
 
 
         if (response.isSuccessful()) {
-            return response.body().toString();
+            return response.body().string();
+        } else {
+            throw new LycamPlusException(response.code(), response.message());
         }
-
-        return null;
     }
 
+
     /**
-     * http header interceptor
+     * http Authenticator
      */
-    private Interceptor headerInterceptor = new Interceptor() {
+    private Interceptor httpInterceptor = new Interceptor() {
+
         @Override
         public Response intercept(Chain chain) throws IOException {
-            OAuth2AccessToken tokenObject = lycamPlusOAuth2.getToken();
 
+
+            Request origin = chain.request();
+            OAuth2AccessToken tokenObject = lycamPlusOAuth2.getToken();
             String token = tokenObject.getAccessToken();
-            Request request = chain.request()
-                    .newBuilder()
-                    .addHeader(Constant.HEADER_AUTHORIZATION, Constant.HEADER_BEARER + token)
-                    .build();
+
+            Request.Builder requestBuilder = origin.newBuilder()
+                    .header(Constant.HEADER_AUTHORIZATION, Constant.HEADER_BEARER + token);
+            Request request = requestBuilder.build();
+
+
             return chain.proceed(request);
         }
     };

@@ -15,6 +15,18 @@ public class UserRequestModel implements Serializable {
     private String description;
     private String displayName;
 
+
+    public UserRequestModel() {}
+
+    public UserRequestModel(String username, String password, String email, String phone, String description, String displayName) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.phone = phone;
+        this.description = description;
+        this.displayName = displayName;
+    }
+
     public String getUsername() {
         return username;
     }

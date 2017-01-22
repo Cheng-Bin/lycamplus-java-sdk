@@ -9,12 +9,11 @@ import tv.lycam.model.TokenResponseModel;
 import tv.lycam.model.UserRequestModel;
 import tv.lycam.model.UserResponseModel;
 
-import java.io.IOException;
 
 /**
- * Created by lycamandroid on 17/1/18.
+ * Created by chapin on 17/1/18.
  */
-public class User {
+public class UserAPI {
 
     private HttpClient httpClient;
     private Gson gson;
@@ -41,29 +40,46 @@ public class User {
 
         String url = String.format("%s/%s", Constant.API_BASE_URL, "users");
 
-        String jsonStr = gson.toJson(url);
+        String jsonStr = gson.toJson(userRequestModel);
 
         String responseJson = null;
+
         try {
 
             responseJson = httpClient.Post(url, jsonStr);
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
         return gson.fromJson(responseJson, UserResponseModel.class);
     }
 
+
     /**
-     *  get Token for uuid.
+     *  get Token by uuid.
      *
      * @param uuid
+     * @param expires token expires
      * @return
      */
-    public TokenResponseModel getToken(String uuid) {
+    public TokenResponseModel assume(String uuid, long expires) {
 
-        return null;
+        String url = String.format("%s/users/%s/assume", Constant.API_BASE_URL, uuid);
+
+        String responseJson = null;
+
+        try {
+            String expiresJson = "{\"durationSeconds\":\"" + expires + "\"}";
+
+            responseJson = httpClient.Post(url, expiresJson);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+        return gson.fromJson(responseJson, TokenResponseModel.class);
     }
 
 

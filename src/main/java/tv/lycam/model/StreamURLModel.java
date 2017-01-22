@@ -35,4 +35,13 @@ public class StreamURLModel implements Serializable {
     public void setBitrate(String bitrate) {
         this.bitrate = bitrate;
     }
+
+    @Override
+    public String toString() {
+        return "StreamURLModel{" +
+                "type='" + type + '\'' +
+                ", url='" + url + '\'' +
+                ", bitrate='" + bitrate + '\'' +
+                '}';
+    }
 }

@@ -2,25 +2,25 @@ package tv.lycam.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
- * Created by lycamandroid on 17/1/18.
+ * Created by chapin on 17/1/19.
  */
-public class StreamResponseModelList implements Serializable {
+public class StreamSearchListModel implements Serializable {
 
-
-    private int totoalItems;
+    private int totalItems;
     private int resultsPerPage;
     private int pageNumber;
     private boolean nextPageAvailable;
-    private ArrayList<StreamResponseModel> items;
+    private ArrayList<StreamSearchModel> items;
 
-    public int getTotoalItems() {
-        return totoalItems;
+    public int getTotalItems() {
+        return totalItems;
     }
 
-    public void setTotoalItems(int totoalItems) {
-        this.totoalItems = totoalItems;
+    public void setTotalItems(int totalItems) {
+        this.totalItems = totalItems;
     }
 
     public int getResultsPerPage() {
@@ -47,11 +47,22 @@ public class StreamResponseModelList implements Serializable {
         this.nextPageAvailable = nextPageAvailable;
     }
 
-    public ArrayList<StreamResponseModel> getItems() {
+    public ArrayList<StreamSearchModel> getItems() {
         return items;
     }
 
-    public void setItems(ArrayList<StreamResponseModel> items) {
+    public void setItems(ArrayList<StreamSearchModel> items) {
         this.items = items;
+    }
+
+    @Override
+    public String toString() {
+        return "StreamSearchListModel{" +
+                "totalItems=" + totalItems +
+                ", resultsPerPage=" + resultsPerPage +
+                ", pageNumber=" + pageNumber +
+                ", nextPageAvailable=" + nextPageAvailable +
+                ", items=" + items +
+                '}';
     }
 }

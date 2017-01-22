@@ -1,5 +1,8 @@
 package tv.lycam.model;
 
+import tv.lycam.enumeration.Order;
+import tv.lycam.enumeration.Sort;
+
 import java.io.Serializable;
 
 /**
@@ -7,10 +10,19 @@ import java.io.Serializable;
  */
 public class PageModel implements Serializable {
 
-    private int resultsPerPage;
+    private  int resultsPerPage;
     private int page;
-    private String sort;
-    private String order;
+    private Sort sort;
+    private Order order;
+
+    public PageModel(){}
+
+    public PageModel(int resultsPerPage, int pageNumber, Sort sort, Order order) {
+        this.resultsPerPage = resultsPerPage;
+        this.page = pageNumber;
+        this.sort = sort;
+        this.order = order;
+    }
 
     public int getResultsPerPage() {
         return resultsPerPage;
@@ -29,18 +41,18 @@ public class PageModel implements Serializable {
     }
 
     public String getSort() {
-        return sort;
+        return sort.getValue();
     }
 
-    public void setSort(String sort) {
+    public void setSort(Sort sort) {
         this.sort = sort;
     }
 
     public String getOrder() {
-        return order;
+        return order.getValue();
     }
 
-    public void setOrder(String order) {
+    public void setOrder(Order order) {
         this.order = order;
     }
 }

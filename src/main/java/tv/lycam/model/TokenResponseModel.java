@@ -9,7 +9,7 @@ public class TokenResponseModel implements Serializable  {
 
     private String success;
     private String scope;
-    private TokenModel tokenModel;
+    private TokenModel token;
 
     public String getSuccess() {
         return success;
@@ -27,12 +27,12 @@ public class TokenResponseModel implements Serializable  {
         this.scope = scope;
     }
 
-    public TokenModel getTokenModel() {
-        return tokenModel;
+    public TokenModel getToken() {
+        return token;
     }
 
-    public void setTokenModel(TokenModel tokenModel) {
-        this.tokenModel = tokenModel;
+    public void setToken(TokenModel token) {
+        this.token = token;
     }
 
     private class TokenModel implements Serializable {
@@ -63,6 +63,24 @@ public class TokenResponseModel implements Serializable  {
         public void setExpires_in(String expires_in) {
             this.expires_in = expires_in;
         }
+
+        @Override
+        public String toString() {
+            return "TokenModel{" +
+                    "token_type='" + token_type + '\'' +
+                    ", access_token='" + access_token + '\'' +
+                    ", expires_in='" + expires_in + '\'' +
+                    '}';
+        }
     }
 
+
+    @Override
+    public String toString() {
+        return "TokenResponseModel{" +
+                "success='" + success + '\'' +
+                ", scope='" + scope + '\'' +
+                ", tokenModel=" + token +
+                '}';
+    }
 }

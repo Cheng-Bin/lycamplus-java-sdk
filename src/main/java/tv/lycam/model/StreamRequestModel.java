@@ -21,6 +21,40 @@ public class StreamRequestModel implements Serializable {
     private String city;
     private String privacy;
 
+    public StreamRequestModel() {
+
+    }
+
+    public StreamRequestModel(String user, String title, String description, String thumbnailURL) {
+        this.user = user;
+        this.title = title;
+        this.description = description;
+        this.thumbnailURL = thumbnailURL;
+    }
+
+    public StreamRequestModel(String user, String title, String description, String thumbnailURL, String privacy) {
+        this.user = user;
+        this.title = title;
+        this.description = description;
+        this.thumbnailURL = thumbnailURL;
+        this.privacy = privacy;
+    }
+
+    public StreamRequestModel(String user, String title, String description, String thumbnailURL, float startLat, float startLon, String country, String state, String city, String privacy) {
+        this.user = user;
+        this.title = title;
+        this.description = description;
+        this.thumbnailURL = thumbnailURL;
+        this.startLat = startLat;
+        this.startLon = startLon;
+        this.country = country;
+        State = state;
+        this.city = city;
+        this.privacy = privacy;
+    }
+
+
+
     public String getUser() {
         return user;
     }
@@ -115,5 +149,23 @@ public class StreamRequestModel implements Serializable {
 
     public void setPrivacy(String privacy) {
         this.privacy = privacy;
+    }
+
+    @Override
+    public String toString() {
+        return "StreamRequestModel{" +
+                "user='" + user + '\'' +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", thumbnailURL='" + thumbnailURL + '\'' +
+                ", startLat=" + startLat +
+                ", startLon=" + startLon +
+                ", endLat=" + endLat +
+                ", endLon=" + endLon +
+                ", country='" + country + '\'' +
+                ", State='" + State + '\'' +
+                ", city='" + city + '\'' +
+                ", privacy='" + privacy + '\'' +
+                '}';
     }
 }
