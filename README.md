@@ -21,7 +21,13 @@
 在项目根目录 build.gradle 文件中添加：
 
 ```
- compile 'tv.lycam:lycamplus-java-sdk:1.0.0'
+compile group:'tv.lycam', name:'lycamplus-java-sdk', version: '1.0.0'
+```
+
+或者
+
+```
+compile 'tv.lycam:lycamplus-java-sdk:1.0.0'
 ```
 
 ## 使用
